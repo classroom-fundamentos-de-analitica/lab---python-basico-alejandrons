@@ -11,7 +11,8 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 
 """
-
+import csv
+from datetime import datetime
 
 def pregunta_01():
     """
@@ -21,7 +22,14 @@ def pregunta_01():
     214
 
     """
-    return
+    Total=0
+    with open("data.csv") as File:
+        reader = csv.reader(File,delimiter="\t")
+
+        for row in reader:
+           Total += int(row[1]) 
+
+    return Total
 
 
 def pregunta_02():
@@ -39,8 +47,19 @@ def pregunta_02():
     ]
 
     """
-    return
+    letras = dict()
+    with open("data.csv") as File:
+        reader = csv.reader(File,delimiter="\t")
 
+        for row in reader:
+            if not row[0] in letras.keys():
+                letras[row[0]] = 1
+            else:
+                letras[row[0]] += 1
+    
+    pares = list(letras.items())
+    pares = sorted(pares,key= lambda letra : letra[0])
+    return pares
 
 def pregunta_03():
     """
@@ -57,8 +76,20 @@ def pregunta_03():
     ]
 
     """
-    return
+    letras = dict()
+    with open("data.csv") as File:
+        reader = csv.reader(File,delimiter="\t")
 
+        for row in reader:
+            if not row[0] in letras.keys():
+                letras[row[0]] = int(row[1])
+            else:
+                letras[row[0]] += int(row[1])
+    
+    pares = list(letras.items())
+    pares = sorted(pares,key= lambda letra : letra[0])
+    
+    return pares
 
 def pregunta_04():
     """
@@ -82,8 +113,20 @@ def pregunta_04():
     ]
 
     """
-    return
+    agenda = dict()
+    with open("data.csv") as File:
+        reader = csv.reader(File,delimiter="\t")
 
+        for row in reader:
+            
+            fecha = row[2][5:7]
+            if not fecha in agenda.keys():
+                agenda[fecha] = 1
+            else:
+                agenda[fecha] += 1
+    agendaOrg = list(agenda.items())
+    agendaOrg = sorted(agendaOrg,key= lambda letra : letra[0])
+    return agendaOrg
 
 def pregunta_05():
     """
@@ -100,8 +143,22 @@ def pregunta_05():
     ]
 
     """
-    return
+    valores=dict()
+    with open("data.csv") as File:
+        reader = csv.reader(File,delimiter="\t")
 
+        for row in reader:
+            if not row[0] in valores.keys():
+                valores[row[0]]= [int(row[1])]
+            else:
+                valores[row[0]].append(int(row[1]))
+    
+    extremos = list()
+    for e in valores.keys():
+        extremos.append((e,max(valores[e]),min(valores[e])))
+    extremos = sorted(extremos, key=lambda letra : letra[0])
+    
+    return extremos
 
 def pregunta_06():
     """
@@ -125,8 +182,24 @@ def pregunta_06():
     ]
 
     """
-    return
-
+    valores=dict()
+    with open("data.csv") as File:
+        reader = csv.reader(File,delimiter="\t")
+        for row in reader:
+            datos = row[-1].split(",")
+            for e in datos:
+                elemento = e.split(":")
+                
+                if not elemento[0] in valores.keys():
+                    valores[elemento[0]] = [int(elemento[1])]
+                else:
+                    valores[elemento[0]].append(int(elemento[1]))
+    
+    ValoresOrg = list()
+    for i in valores.keys():
+        ValoresOrg.append((i,min(valores[i]),max(valores[i])))
+    ValoresOrg = sorted(ValoresOrg, key= lambda letras : letras[0])
+    return ValoresOrg
 
 def pregunta_07():
     """
@@ -149,8 +222,17 @@ def pregunta_07():
     ]
 
     """
-    return
-
+    valores=dict()
+    with open("data.csv") as File:
+        reader = csv.reader(File,delimiter="\t")
+        for row in reader:
+            if not int(row[1]) in valores.keys():
+                valores[int(row[1])] = [row[0]]
+            else:
+                valores[int(row[1])].append(row[0])
+    ValoresOrg = list(valores.items())
+    ValoresOrg = sorted(ValoresOrg, key = lambda numero : numero[0])
+    return ValoresOrg
 
 def pregunta_08():
     """
@@ -174,8 +256,21 @@ def pregunta_08():
     ]
 
     """
-    return
-
+    valores=dict()
+    with open("data.csv") as File:
+        reader = csv.reader(File,delimiter="\t")
+        for row in reader:
+            if not int(row[1]) in valores.keys():
+                valores[int(row[1])] = [row[0]]
+            else:
+                valores[int(row[1])].append(row[0])
+    for i in valores.keys():
+        valores[i] = set(valores[i])
+        valores[i] = sorted(list(valores[i]))
+    ValoresOrg = list(valores.items())
+    ValoresOrg = sorted(ValoresOrg, key = lambda numero : numero[0])
+    
+    return ValoresOrg
 
 def pregunta_09():
     """
@@ -197,8 +292,20 @@ def pregunta_09():
     }
 
     """
-    return
-
+    valores=dict()
+    with open("data.csv") as File:
+        reader = csv.reader(File,delimiter="\t")
+        for row in reader:
+            datos = row[-1].split(",")
+            for e in datos:
+                elemento = e.split(":")
+                
+                if not elemento[0] in valores.keys():
+                    valores[elemento[0]] = 1
+                else:
+                    valores[elemento[0]] += 1
+    
+    return valores
 
 def pregunta_10():
     """
@@ -218,8 +325,12 @@ def pregunta_10():
 
 
     """
-    return
-
+    valores = list()
+    with open("data.csv") as File:
+        reader = csv.reader(File,delimiter="\t")
+        for row in reader:
+            valores.append((row[0],len(row[3].split(",")),len(row[4].split(","))))
+    return valores
 
 def pregunta_11():
     """
@@ -239,8 +350,23 @@ def pregunta_11():
 
 
     """
-    return
+    valores=dict()
+    with open("data.csv") as File:
+        reader = csv.reader(File,delimiter="\t")
+        for row in reader:
+            datos = row[3].split(",")
+            for e in datos:             
+                if not e in valores.keys():
+                    valores[e] = int(row[1])
+                else:
+                    valores[e] += int(row[1])
 
+    LetrasOrg = sorted(valores.keys())
+    ValoresOrg = dict()
+    for i in LetrasOrg:
+        ValoresOrg[i] = valores[i]
+    
+    return ValoresOrg
 
 def pregunta_12():
     """
@@ -257,4 +383,22 @@ def pregunta_12():
     }
 
     """
-    return
+    valores=dict()
+    with open("data.csv") as File:
+        reader = csv.reader(File,delimiter="\t")
+        for row in reader:
+            if not row[0] in valores.keys():
+                valores[row[0]] = 0
+        
+            datos = row[-1].split(",")
+            for e in datos:
+                elemento = e.split(":")
+                valores[row[0]] += int(elemento[-1])
+
+    LetrasOrg = sorted(valores.keys())
+    ValoresOrg = dict()
+    for i in LetrasOrg:
+        ValoresOrg[i] = valores[i]
+    
+        
+    return ValoresOrg
