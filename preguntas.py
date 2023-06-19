@@ -12,7 +12,6 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 """
 import csv
-from datetime import datetime
 
 def pregunta_01():
     """
@@ -22,14 +21,14 @@ def pregunta_01():
     214
 
     """
-    Total=0
+    total=0
     with open("data.csv") as File:
         reader = csv.reader(File,delimiter="\t")
 
         for row in reader:
-           Total += int(row[1]) 
+           total += int(row[1]) 
 
-    return Total
+    return total
 
 
 def pregunta_02():
@@ -195,11 +194,11 @@ def pregunta_06():
                 else:
                     valores[elemento[0]].append(int(elemento[1]))
     
-    ValoresOrg = list()
+    valoresOrg = list()
     for i in valores.keys():
-        ValoresOrg.append((i,min(valores[i]),max(valores[i])))
-    ValoresOrg = sorted(ValoresOrg, key= lambda letras : letras[0])
-    return ValoresOrg
+        valoresOrg.append((i,min(valores[i]),max(valores[i])))
+    valoresOrg = sorted(valoresOrg, key= lambda letras : letras[0])
+    return valoresOrg
 
 def pregunta_07():
     """
@@ -230,9 +229,9 @@ def pregunta_07():
                 valores[int(row[1])] = [row[0]]
             else:
                 valores[int(row[1])].append(row[0])
-    ValoresOrg = list(valores.items())
-    ValoresOrg = sorted(ValoresOrg, key = lambda numero : numero[0])
-    return ValoresOrg
+    valoresOrg = list(valores.items())
+    valoresOrg = sorted(valoresOrg, key = lambda numero : numero[0])
+    return valoresOrg
 
 def pregunta_08():
     """
@@ -267,10 +266,10 @@ def pregunta_08():
     for i in valores.keys():
         valores[i] = set(valores[i])
         valores[i] = sorted(list(valores[i]))
-    ValoresOrg = list(valores.items())
-    ValoresOrg = sorted(ValoresOrg, key = lambda numero : numero[0])
+    valoresOrg = list(valores.items())
+    valoresOrg = sorted(valoresOrg, key = lambda numero : numero[0])
     
-    return ValoresOrg
+    return valoresOrg
 
 def pregunta_09():
     """
@@ -361,12 +360,12 @@ def pregunta_11():
                 else:
                     valores[e] += int(row[1])
 
-    LetrasOrg = sorted(valores.keys())
-    ValoresOrg = dict()
-    for i in LetrasOrg:
-        ValoresOrg[i] = valores[i]
+    letrasOrg = sorted(valores.keys())
+    valoresOrg = dict()
+    for i in letrasOrg:
+        valoresOrg[i] = valores[i]
     
-    return ValoresOrg
+    return valoresOrg
 
 def pregunta_12():
     """
@@ -395,10 +394,10 @@ def pregunta_12():
                 elemento = e.split(":")
                 valores[row[0]] += int(elemento[-1])
 
-    LetrasOrg = sorted(valores.keys())
-    ValoresOrg = dict()
-    for i in LetrasOrg:
-        ValoresOrg[i] = valores[i]
+    letrasOrg = sorted(valores.keys())
+    valoresOrg = dict()
+    for i in letrasOrg:
+        valoresOrg[i] = valores[i]
     
         
-    return ValoresOrg
+    return valoresOrg
